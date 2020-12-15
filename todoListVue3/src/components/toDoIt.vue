@@ -19,7 +19,7 @@ export default {
   props: {
     todoit: Array
   },
-  emits: ['del-todo'],
+  // emits: ['del-todo'],
   setup(props, ctx) {
     const delTodo = (i) => {
       ctx.emit('del-todo', i)
@@ -55,10 +55,13 @@ export default {
 .item:hover i {
   opacity: 1;
   transition: all 1s ease;
+  pointer-events:auto;
+
 }
 .item > i {
   color: #f00;
   opacity: 0;
+  pointer-events: none;
 }
 .item::before {
   position: absolute;

@@ -1,12 +1,12 @@
 <template>
   <el-row>
-    <el-col :span="12" :offset="6" class="flex">
-      <el-input v-model="wantTodo" placeholder="请输入内容" />
+    <el-col :span="18" :offset="3" class="flex">
+      <el-input v-model="wantTodo" placeholder="请输入内容" @keyup.enter="handleAddToDo" />
       <el-button type="primary" plain @click="handleAddToDo">添加</el-button>
     </el-col>
   </el-row>
   <el-row>
-    <el-col :span="12" :offset="6">
+    <el-col :span="18" :offset="3">
       <to-do :todoit="todoList" @del-todo="delTodo"></to-do>
     </el-col>
   </el-row>
@@ -37,14 +37,14 @@ import ToDoIt from './components/toDoIt.vue'
 const AddtoDo = () => {
   const states = reactive({
     wantTodo: '',
-    todoList: []
+    todoList: [] 
   })
   const handleAddToDo = () => {
     let { wantTodo, todoList } = states
     if (!wantTodo) {
       return Message.info('请填写后在添加')
     }
-    if (todoList.includes(wantTodo)) return Message.info('请勿添加重复事宜')
+    if (todoList.map(v=>v.wantTodo).includes(wantTodo)) return Message.info('请勿添加重复事宜')
     const id = todoList.length
     const isChecked = false
     todoList.unshift({
@@ -65,10 +65,16 @@ export default {
     ToDo
   },
   setup() {
-    const { handleAddToDo, states } = AddtoDo()
+    let { handleAddToDo, states } = AddtoDo()
+    console.log(localStorage.getItem('todoList'))
+    const data = JSON.parse(localStorage.getItem('todoList')||'[]')
+    states.todoList = data
     const delTodo = (val) => {
       states.todoList.splice(val, 1)
     }
+    watch(states.todoList,(state,prev)=>{
+    window.localStorage.setItem('todoList',JSON.stringify(state))
+    })
     return {
       handleAddToDo,
       ...toRefs(states),
