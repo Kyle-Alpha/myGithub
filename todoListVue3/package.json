@@ -1,0 +1,16 @@
+{
+  "name": "todoListVue3",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "vite --open",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "element3": "^0.0.29",
+    "vue": "^3.0.4"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.4",
+    "vite": "^1.0.0-rc.13"
+  }
+}
