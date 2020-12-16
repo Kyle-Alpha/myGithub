@@ -1,6 +1,6 @@
 <template>
   <el-card class="box-card">
-    <div>
+    <el-scrollbar>
       <div v-for="(item, index) in todoit" :key="item.id" class="item">
         <el-checkbox
           v-model="item.isChecked"
@@ -9,7 +9,7 @@
         >
         <i class="el-icon-error" @click="delTodo(index)"></i>
       </div>
-    </div>
+    </el-scrollbar>
   </el-card>
 </template>
 
@@ -55,8 +55,7 @@ export default {
 .item:hover i {
   opacity: 1;
   transition: all 1s ease;
-  pointer-events:auto;
-
+  pointer-events: auto;
 }
 .item > i {
   color: #f00;
